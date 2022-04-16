@@ -28,6 +28,10 @@ trait RegexSyntax {
 
   implicit class CharRegexOps(val char: Char) {
     def ~(char2: Char): Regex = InRangeOf(char, char2)
-    def r: Regex              = Literal(char)
+    def l: Regex              = Literal(char)
+  }
+
+  implicit class StringRegexOps(val str: String) {
+    def l: Regex = literal(str)
   }
 }
