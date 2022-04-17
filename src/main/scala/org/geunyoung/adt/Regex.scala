@@ -1,4 +1,4 @@
-package org.geunyoung
+package org.geunyoung.adt
 
 sealed trait Regex
 

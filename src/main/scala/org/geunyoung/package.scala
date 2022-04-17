@@ -1,11 +1,17 @@
-package org.geunyoung
+package org
+
 import scala.util.matching.{Regex => ScalaRegex}
 
-import org.geunyoung.Regex.{Anchored, CharSpecifier, Quantified, Set}
+import org.geunyoung.adt.Regex
+import org.geunyoung.adt.Regex._
+import org.geunyoung.typeclass.Interpreter
 
-private object RegexInterpreter {
-  def toString(regex: Regex): String =
-    regex match {
+package object geunyoung {
+  val regexInterpreter: Interpreter[Regex, ScalaRegex] = new Interpreter[Regex, ScalaRegex] {
+    override def interpret(from: Regex): ScalaRegex =
+      toString(from).r
+
+    private def toString(from: Regex): String = from match {
       case Regex.Empty                        => ""
       case Regex.AnyChar                      => "."
       case specifier: Regex.CharSpecifier     =>
@@ -55,8 +61,7 @@ private object RegexInterpreter {
         }
       case Regex.Grouped(regex)               => s"(${toString(regex)})"
       case Regex.Concatenated(regex1, regex2) => s"${toString(regex1)}${toString(regex2)}"
-      case Regex.Or(regex1, regex2)           => s"(${toString(regex1)}|${toString(regex2)})"
+      case Regex.Or(regex1, regex2)           => s"(?:${toString(regex1)}|${toString(regex2)})"
     }
-
-  def interpret(regex: Regex): ScalaRegex = toString(regex).r
+  }
 }

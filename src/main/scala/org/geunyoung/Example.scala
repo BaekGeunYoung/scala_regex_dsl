@@ -1,6 +1,7 @@
 package org.geunyoung
 
-import org.geunyoung.Regex.CharSpecifier.{Digit, NotWhiteSpace}
+import org.geunyoung.adt.Regex
+import org.geunyoung.adt.Regex.CharSpecifier.{Digit, NotWhiteSpace}
 
 object Example extends RegexSyntax {
   val email: Regex =
@@ -11,15 +12,15 @@ object Example extends RegexSyntax {
       Digit.quantifiedExact(4) ++ '-' ++
       Digit.quantifiedExact(4)
 
-  val year: Regex  = Digit.quantifiedExact(4)
-  val month: Regex =
+  private val year: Regex  = Digit.quantifiedExact(4)
+  private val month: Regex =
     ('0'.l ++ '1' ~ '9') or ('1'.l ++ '0' ~ '2')
-  val date: Regex  =
+  private val date: Regex  =
     ('0'.l ++ '1' ~ '9') or ('1' ~ '2' ++ Digit) or ('3'.l ++ '0' ~ '1')
 
-  val hour: Regex   = ('0' ~ '1' ++ Digit) or ('2'.l ++ '0' ~ '3')
-  val minute: Regex = '0' ~ '5' ++ Digit
-  val second: Regex = '0' ~ '5' ++ Digit
+  private val hour: Regex   = ('0' ~ '1' ++ Digit) or ('2'.l ++ '0' ~ '3')
+  private val minute: Regex = '0' ~ '5' ++ Digit
+  private val second: Regex = '0' ~ '5' ++ Digit
 
   val iso8601Format: Regex =
     year ++ '-' ++

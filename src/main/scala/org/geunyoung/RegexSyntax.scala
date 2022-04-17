@@ -2,9 +2,10 @@ package org.geunyoung
 
 import scala.language.implicitConversions
 
-import org.geunyoung.Regex._
-import org.geunyoung.Regex.CharSpecifier.{InRangeOf, Literal}
-import org.geunyoung.Regex.Quantified.{OneOrMore, Optional, ZeroOrMore}
+import org.geunyoung.adt.Regex
+import org.geunyoung.adt.Regex._
+import org.geunyoung.adt.Regex.CharSpecifier.{InRangeOf, Literal}
+import org.geunyoung.adt.Regex.Quantified.{OneOrMore, Optional, ZeroOrMore}
 
 trait RegexSyntax {
   implicit def literal(char: Char): Regex  = Literal(char)
