@@ -8,7 +8,8 @@ object Main extends ZIOApp with RegexMatcherSyntax {
     val src2 = "2016-07-08T12:30:00Z"
 
     printLine(Example.iso8601Format.matches(src2)) *>
-      printLine(Example.iso8601Format.findAllIn(src2))
+      printLine(Example.iso8601Format.findAllIn(src2)) *>
+      printLine(Example.koreanPhoneNumber)
   }
 
   override implicit def tag: zio.EnvironmentTag[ZEnv] = EnvironmentTag[ZEnv]
